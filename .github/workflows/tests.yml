@@ -28,10 +28,9 @@ jobs:
           pip install pytest-cov
 
       - name: Run tests
-        run: coverage run -m pytest --cov nagerapi --cov-report html tests/test*
+        run: coverage run -m pytest --cov nagerapi --cov-report xml tests/test*
 
       - name: Codecov coverage reports
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./htmlcov
