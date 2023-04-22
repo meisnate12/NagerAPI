@@ -1,10 +1,18 @@
 
-Welcome to NagerAPI's documentation!
+Welcome to Nager Public Holiday API's documentation!
 ==========================================================
 
-.. image:: https://img.shields.io/travis/com/meisnate12/NagerAPI?style=plastic
+.. image:: https://img.shields.io/github/actions/workflow/status/meisnate12/NagerAPI/tests.yml?branch=master&style=plastic
     :target: https://app.travis-ci.com/meisnate12/NagerAPI
     :alt: Build Testing
+
+.. image:: https://img.shields.io/codecov/c/github/meisnate12/NagerAPI?style=plastic
+    :target: https://codecov.io/gh/meisnate12/NagerAPI
+    :alt: Build Coverage
+
+.. image:: https://codecov.io/gh/meisnate12/NagerAPI/branch/master/graph/badge.svg?token=lmUl0XqFjd
+    :target: https://codecov.io/gh/meisnate12/NagerAPI
+    :alt: Build Coverage
 
 .. image:: https://img.shields.io/readthedocs/nagerapi?style=plastic
     :target: https://nagerapi.metamanager.wiki
@@ -32,7 +40,7 @@ Welcome to NagerAPI's documentation!
 
 Overview
 ----------------------------------------------------------
-Unofficial Python bindings for the Nager Date API. The goal is to make interaction with the API as easy as possible.
+Unofficial Python bindings for the `Nager Public Holiday API <https://date.nager.at/Api>`_. The goal is to make interaction with the API as easy as possible.
 
 
 Installation & Documentation
@@ -53,7 +61,7 @@ Connecting to Nager
 Getting a NagerObjectAPI Instance
 ----------------------------------------------------------
 
-To connect to the nager API you use the :class:`~nagerapi.NagerObjectAPI` object.
+To connect to the `Nager Public Holiday API <https://date.nager.at/Api>`_ you use the :class:`~nagerapi.NagerObjectAPI` object.
 
 .. code-block:: python
 
@@ -71,7 +79,7 @@ To connect to the nager API you use the :class:`~nagerapi.NagerObjectAPI` object
 Usage Examples
 ==========================================================
 
-Example 1: List all 2022 US Holidays.
+Example: List all 2022 US Holidays.
 
 In this one we get the ``US`` :class:`~nagerapi.Country` Object and call ``public_holidays`` from that object.
 
