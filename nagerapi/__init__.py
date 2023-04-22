@@ -163,9 +163,9 @@ class Country(NagerBase):
         """ Alias for :meth:`~NagerObjectAPI.public_holidays` for this country. """
         return [Holiday(self._nager, h) for h in self._nager.api.get_public_holidays(year, self.code)]
 
-    def is_today_public_holiday(self):
+    def is_today_public_holiday(self, offset: int = None):
         """ Alias for :meth:`~NagerObjectAPI.is_today_public_holiday` for this country. """
-        return self._nager.api.get_is_today_public_holiday()
+        return self._nager.api.get_is_today_public_holiday(self.code, offset=offset)
 
     def next_public_holidays(self):
         """ Alias for :meth:`~NagerObjectAPI.next_public_holidays` for this country. """
@@ -267,11 +267,12 @@ class NagerObjectAPI:
         """
         return self.country(country, load=False).public_holidays(year)
 
-    def is_today_public_holiday(self, country: Union[Country, str] = None):
+    def is_today_public_holiday(self, country: Union[Country, str] = None, offset: int = None):
         """ Is today a public Holiday for the given country.
 
             Parameters:
                 country (Union[Country, str]): ISO 3166-1 alpha-2 Country Code.
+                offset (int): UTC timezone offset.
 
             Returns:
                 bool
@@ -279,7 +280,7 @@ class NagerObjectAPI:
             Raises:
                 :class:`NagerException`: When an Invalid Country Code is provided.
         """
-        return self.country(country, load=False).is_today_public_holiday()
+        return self.country(country, load=False).is_today_public_holiday(offset=offset)
 
     def next_public_holidays(self, country: Union[Country, str] = None):
         """ Returns the upcoming public :class:`~Holiday` Objects for the next 365 days for the given country.
@@ -395,11 +396,12 @@ class NagerRawAPI:
         """
         return self._request(f"{base_url}PublicHolidays/{year}/{country}")
 
-    def get_is_today_public_holiday(self, country: str):
+    def get_is_today_public_holiday(self, country: str, offset: int = None):
         """ `GET IsTodayPublicHoliday <https://date.nager.at/swagger/index.html>`__: Is today a public holiday.
 
             Parameters:
                 country (str): ISO 3166-1 alpha-2 Country Code.
+                offset (int): UTC timezone offset.
 
             Returns:
                 bool
@@ -407,7 +409,8 @@ class NagerRawAPI:
             Raises:
                 :class:`NagerException`: When an Invalid Country Code is provided.
         """
-        return self._request(f"{base_url}IsTodayPublicHoliday/{country}", status_bool=True)
+        params = {} if offset is None else {"offset": offset}
+        return self._request(f"{base_url}IsTodayPublicHoliday/{country}", status_bool=True, **params)
 
     def get_next_public_holidays(self, country: str):
         """ `GET NextPublicHolidays <https://date.nager.at/swagger/index.html>`__: Returns the upcoming public holidays for the next 365 days for the given country.
