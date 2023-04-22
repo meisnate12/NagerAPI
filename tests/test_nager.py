@@ -45,7 +45,6 @@ class NagerTests(unittest.TestCase):
         self.assertIn("US", self.nager.available_countries)
         self.assertIn("gb", self.nager.available_countries)
         us = self.nager.country("us", load=False)
-        logger.info(us._full)
         self.assertEqual(us.region, "Americas")
         self.assertEqual(f"{us}", "United States")
         self.assertEqual(us.__repr__(), "United States")
