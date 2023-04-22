@@ -27,7 +27,7 @@ jobs:
           pip install pytest
 
       - name: Run tests
-        run: pytest tests/test*
+        run: pytest tests/test* --cov .
 
       - name: Codecov coverage reports
         uses: codecov/codecov-action@v3
