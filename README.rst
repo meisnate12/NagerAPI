@@ -2,7 +2,7 @@
 Welcome to Nager Public Holiday API's documentation!
 ==========================================================
 
-.. image:: https://img.shields.io/travis/com/meisnate12/NagerAPI?style=plastic
+.. image:: https://img.shields.io/github/actions/workflow/status/meisnate12/NagerAPI/tests.yml?branch=master&style=plastic
     :target: https://app.travis-ci.com/meisnate12/NagerAPI
     :alt: Build Testing
 
