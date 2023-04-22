@@ -6,11 +6,7 @@ Welcome to Nager Public Holiday API's documentation!
     :target: https://app.travis-ci.com/meisnate12/NagerAPI
     :alt: Build Testing
 
-.. image:: https://img.shields.io/codecov/c/github/meisnate12/NagerAPI?style=plastic
-    :target: https://codecov.io/gh/meisnate12/NagerAPI
-    :alt: Build Coverage
-
-.. image:: https://codecov.io/gh/meisnate12/NagerAPI/branch/master/graph/badge.svg?token=lmUl0XqFjd
+.. image:: https://img.shields.io/codecov/c/github/meisnate12/NagerAPI?color=greenred&style=plastic
     :target: https://codecov.io/gh/meisnate12/NagerAPI
     :alt: Build Coverage
 
