@@ -25,9 +25,10 @@ jobs:
           pip install -r requirements.txt
           python setup.py install
           pip install pytest
+          pip install pytest-cov
 
       - name: Run tests
-        run: pytest tests/test* --cov .
+        run: coverage run -m pytest --cov nagerapi tests/test*
 
       - name: Codecov coverage reports
         uses: codecov/codecov-action@v3
