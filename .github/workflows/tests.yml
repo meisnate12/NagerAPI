@@ -1,21 +1,24 @@
 name: Run Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
 
 jobs:
   run-tests:
-
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -23,9 +26,8 @@ jobs:
         run: |
           python -c "import sys; print(sys.version)"
           pip install -r requirements.txt
+          pip install -r requirements-dev.txt
           python setup.py install
-          pip install pytest
-          pip install pytest-cov
 
       - name: Run tests
         run: coverage run -m pytest --cov nagerapi --cov-report xml tests/test*
@@ -35,3 +37,19 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.xml
+
+  tag-new-versions:
+    runs-on: ubuntu-latest
+    if: ${{ success() }}
+    needs: [run-tests]
+    steps:
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+          fetch-depth: 2
+
+      - uses: salsify/action-detect-and-tag-new-version@v1.0.3
+        with:
+          version-command: |
+            cat VERSION
